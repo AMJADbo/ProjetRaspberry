@@ -1,10 +1,8 @@
 package com.paiement.Backend.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name = "badges")
 public class Badge {
@@ -25,4 +23,15 @@ public class Badge {
 
     @Column(nullable = false)
     private boolean actif = true;
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getUidRfid() { return uidRfid; }
+    public void setUidRfid(String uidRfid) { this.uidRfid = uidRfid; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+    public LocalDateTime getDateAssociation() { return dateAssociation; }
+    public void setDateAssociation(LocalDateTime dateAssociation) { this.dateAssociation = dateAssociation; }
+    public boolean isActif() { return actif; }
+    public void setActif(boolean actif) { this.actif = actif; }
 }
