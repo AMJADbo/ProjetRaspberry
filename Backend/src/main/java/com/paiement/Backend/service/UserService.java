@@ -3,16 +3,18 @@ package com.paiement.Backend.service;
 import com.paiement.Backend.dto.CreateUserRequest;
 import com.paiement.Backend.entity.User;
 import com.paiement.Backend.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+}
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
