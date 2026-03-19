@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Utilisateurs</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: #f0f2f5; }
+        .navbar { background: #4f46e5; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .navbar a { color: white; text-decoration: none; }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        .card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 1.5rem; }
+        h2 { margin-bottom: 1rem; color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f8f9fa; padding: 10px; text-align: left; font-size: 13px; color: #666; border-bottom: 1px solid #eee; }
+        td { padding: 12px 10px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+        .badge { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .badge-admin { background: #fef3c7; color: #92400e; }
+        .badge-user { background: #dbeafe; color: #1e40af; }
+        .badge-merchant { background: #d1fae5; color: #065f46; }
+        .badge-actif { background: #d1fae5; color: #065f46; }
+        .badge-inactif { background: #fee2e2; color: #991b1b; }
+        .btn { padding: 6px 14px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; }
+        .btn-toggle { background: #f3f4f6; color: #374151; }
+        .btn-primary { background: #4f46e5; color: white; }
+        .form-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .form-row input, .form-row select { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; min-width: 150px; }
+        .logout { font-size: 14px; }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <span>👤 Admin — <span th:text="${sessionUser.nom}"></span></span>
+    <a class="logout" href="/logout">Se déconnecter</a>
+</nav>
+<div class="container">
+    <!-- Créer un utilisateur -->
+    <div class="card">
+        <h2>Créer un utilisateur</h2>
+        <form th:action="@{/admin/users}" method="post">
+            <div class="form-row">
+                <input type="text" name="nom" placeholder="Nom" required/>
+                <input type="email" name="email" placeholder="Email" required/>
+                <input type="password" name="motDePasse" placeholder="Mot de passe" required/>
+                <select name="role">
+                    <option value="USER">Utilisateur</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="MERCHANT">Commerçant</option>
+                </select>
+                <button class="btn btn-primary" type="submit">Créer</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Liste des utilisateurs -->
+    <div class="card">
+        <h2>Utilisateurs</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>Nom</th><th>Email</th><th>Rôle</th><th>Solde</th><th>Statut</th><th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.nom}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${user.role.name() == 'ADMIN'} ? 'badge-admin' : (${user.role.name() == 'MERCHANT'} ? 'badge-merchant' : 'badge-user')"
+                              th:text="${user.role}"></span>
+                    </td>
+                    <td th:text="${user.solde} + ' €'"></td>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${user.actif} ? 'badge-actif' : 'badge-inactif'"
+                              th:text="${user.actif} ? 'Actif' : 'Inactif'"></span>
+                    </td>
+                    <td>
+                        <form th:action="@{/admin/users/{id}/toggle(id=${user.id})}" method="post">
+                            <button class="btn btn-toggle" type="submit"
+                                    th:text="${user.actif} ? 'Désactiver' : 'Réactiver'"></button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
