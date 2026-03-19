@@ -161,4 +161,9 @@ public class WebController {
         User user = (User) session.getAttribute("sessionUser");
         return user != null && user.getRole() == User.Role.MERCHANT;
     }
+
+    @GetMapping("/")
+public String home() {
+    return "redirect:/login";
+}
 }

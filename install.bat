@@ -21,7 +21,7 @@ if exist "C:\logiciels\UwAmp\bin\database\mysql-5.7.11\bin\mysql.exe" (
 
 echo MySQL trouve !
 
-echo Creation de la base de donnees...
+echo Creation de la base de donnees... Le mot de passe est "root"
 set /p MDPROOT=root : 
 %MYSQL% -u root -p%MDPROOT% -e "CREATE DATABASE IF NOT EXISTS rfid_payment CHARACTER SET utf8mb4;"
 
