@@ -10,16 +10,20 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-echo Verification de MySQL...
-mysql --version
-if %errorlevel% neq 0 (
-    echo MySQL non installe.
+echo Verification de MySQL via UwAmp...
+if exist "C:\logiciels\UwAmp\bin\database\mysql-5.7.11\bin\mysql.exe" (
+    set MYSQL=C:\logiciels\UwAmp\bin\database\mysql-5.7.11\bin\mysql.exe
+) else (
+    echo MySQL introuvable. Verifiez que UwAmp est installe dans C:\logiciels\UwAmp
     pause
     exit /b 1
 )
 
+echo MySQL trouve !
+
 echo Creation de la base de donnees...
-mysql -u root -e "CREATE DATABASE IF NOT EXISTS rfid_payment;"
+set /p MDPROOT=root : 
+%MYSQL% -u root -p%MDPROOT% -e "CREATE DATABASE IF NOT EXISTS rfid_payment CHARACTER SET utf8mb4;"
 
 echo Lancement du Backend...
 cd Backend
