@@ -38,4 +38,10 @@ javac RfidPayment.java
 java RfidPayment
 ```
 
-## Commande pour démarrer le serveur ./mvnw spring-boot:run
+## Commande pour démarrer le serveur
+```bash
+ ./mvnw spring-boot:run
+```
+
+
+## Il faut en fonction du pc changer l'adresse ip en faisant ipconfig sur windows et changer l'ip d'API_URL dans le fichier RfidPayment qui est dans RaspberryClient.
