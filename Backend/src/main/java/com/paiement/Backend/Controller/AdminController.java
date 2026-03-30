@@ -29,4 +29,6 @@ public class AdminController {
     public ResponseEntity<?> toggleActif(@PathVariable Long id) {
         return ResponseEntity.ok(userService.toggleActif(id));
     }
+
+    
 }
