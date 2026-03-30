@@ -37,3 +37,5 @@ cd RaspberryClient
 javac RfidPayment.java
 java RfidPayment
 ```
+
+## Commande pour démarrer le serveur ./mvnw spring-boot:run

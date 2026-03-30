@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class RfidPayment {
 
-    private static final String API_URL = "http://10.3.203.4:8080";
+    private static final String API_URL = "http://10.3.169.4:8080";
     private static final String SCRIPT_PATH = "/home/pi/script/tag_detect.sh";
 
     public static void main(String[] args) throws Exception {
