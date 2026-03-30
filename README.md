@@ -44,4 +44,7 @@ java RfidPayment
 ```
 
 
-## Il faut en fonction du pc changer l'adresse ip en faisant ipconfig sur windows et changer l'ip d'API_URL dans le fichier RfidPayment qui est dans RaspberryClient.
+## !!!!! IMPORTANT !!!!! 
+```bash
+Il faut changer l'adresse ip en faisant ipconfig sur windows et changer l'ip d'API_URL dans le fichier RfidPayment qui est dans RaspberryClient.
+```
